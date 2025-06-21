@@ -88,3 +88,23 @@ Install with:
 ```bash
 pip install -r requirements.txt
 ```
+---
+
+## 🧑‍🎨 How to Customize
+### ✍️ Caption Font
+- Drop your .ttf font in the font/ folder
+
+- Edit the font path in app.py and vintagephoto.py
+
+### 🎨 Style the Web UI
+- Modify static/css/styles.css and static/js/script.js
+
+- Optional: Add a dark/light mode toggle
+
+### ⚠️ Known Issues
+- Image processing may take a few seconds for large files
+
+- Caption cutoff if too long — keep text short
+
+- Flask version only applies effects after submitting (not live preview)
+ 
