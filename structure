@@ -1,0 +1,9 @@
+
+VintagePhotoboothApp/
+│
+├── static/             # For CSS/JS
+├── templates/          # HTML files go here
+├── exports/            # Processed images
+├── PlayfairDisplay.ttf
+├── vintagephoto.py     # Processing logic
+└── app.py              # Flask server
