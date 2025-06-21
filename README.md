@@ -17,7 +17,7 @@ A full-featured **vintage photo editor** that transforms modern photos into nost
 ---
 
 ## 📁 Folder Structure
-
+```bash 
 Vintage-Photobooth-App/
 │
 ├── app/ ← Flask app
@@ -40,7 +40,7 @@ Vintage-Photobooth-App/
 │
 ├── README.md
 └── requirements.txt
-
+```
 ---
 
 ## 💻 1. Desktop App (Tkinter)
