@@ -42,6 +42,10 @@ Vintage-Photobooth-App/
 └── requirements.txt
 ```
 ---
+## Ui Snap
+<img src="https://github.com/user-attachments/assets/38757047-c5e3-427d-8d0d-f068794d0c16" alt="UI" width="500" height="600">
+
+---
 
 ## 💻 1. Desktop App (Tkinter)
 
@@ -89,8 +93,6 @@ Install with:
 pip install -r requirements.txt
 ```
 ---
-## Ui Snap
-<img src="https://github.com/user-attachments/assets/38757047-c5e3-427d-8d0d-f068794d0c16" alt="UI" width="400" height="300">
 
 ## 🧑‍🎨 How to Customise
 ### ✍️ Caption Font
