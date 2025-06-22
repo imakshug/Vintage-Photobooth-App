@@ -52,7 +52,7 @@ python vintagephoto.py
 ```
 
 ✅ What It Does
-- Opens a file dialog to select an image
+- Opens a file dialogue to select an image
 
 - Prompts for caption + date
 
@@ -73,11 +73,11 @@ http://127.0.0.1:5000
 ✅ What It Offers
 Upload image via browser
 
-Add custom message and date
+Add a custom message and date
 
 See live preview
 
-Download final image
+Download the final image
 
 ---
 
@@ -89,10 +89,13 @@ Install with:
 pip install -r requirements.txt
 ```
 ---
+## Ui Snap
+<img src="https://github.com/user-attachments/assets/38757047-c5e3-427d-8d0d-f068794d0c16" alt="UI" width="400" height="300">
 
-## 🧑‍🎨 How to Customize
+## 🧑‍🎨 How to Customise
 ### ✍️ Caption Font
 - Drop your .ttf font in the font/ folder
+
 
 - Edit the font path in app.py and vintagephoto.py
 
