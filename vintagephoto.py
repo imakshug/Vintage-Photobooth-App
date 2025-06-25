@@ -36,14 +36,14 @@ def add_film_grain(im, intensity=10):
     modify_all_pixels(im, grain)
     return im
 
-# def add_light_leak(im):
-#     overlay = Image.new('RGB', im.size)
-#     draw = ImageDraw.Draw(overlay)
-#     w, h = im.size
-#     for i in range(0, 300, 5):
-#         color = (255, 180, 120, max(0, 200 - i))
-#         draw.ellipse([(-i, -i), (w // 2 + i, h // 2 + i)], fill=color)
-#     return Image.blend(im, overlay, 0.15)
+def add_light_leak(im):
+    overlay = Image.new('RGB', im.size)
+    draw = ImageDraw.Draw(overlay)
+    w, h = im.size
+    for i in range(0, 300, 5):
+        color = (255, 180, 120, max(0, 200 - i))
+        draw.ellipse([(-i, -i), (w // 2 + i, h // 2 + i)], fill=color)
+    return Image.blend(im, overlay, 0.15)
 
 # def add_dust_and_scratches(im, count=150):
 #     draw = ImageDraw.Draw(im)
@@ -130,7 +130,7 @@ if __name__ == '__main__':
         # Apply vintage effects
         image = vintage_colors(image)
         image = add_film_grain(image)
-        # image = add_light_leak(image)
+        image = add_light_leak(image)
         # image = add_dust_and_scratches(image)
         image = add_polaroid_frame(image)
 
