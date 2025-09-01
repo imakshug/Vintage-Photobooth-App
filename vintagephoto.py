@@ -57,14 +57,21 @@ def add_light_leak(im):
 #     return im
 
 def add_polaroid_frame(im, border_size_ratio=0.05, bottom_extra_ratio=0.2):
-    w, h = im.size
-    border = int(min(w, h) * border_size_ratio)
-    bottom_border = int(h * bottom_extra_ratio)
-
-    new_w = w + border * 2
-    new_h = h + border * 2 + bottom_border
-
-    framed = Image.new('RGB', (new_w, new_h), (255, 255, 255))
+    # Resize image to 1:1 (square)
+    min_side = min(im.size)
+    im = im.crop((
+        (im.width - min_side) // 2,
+        (im.height - min_side) // 2,
+        (im.width + min_side) // 2,
+        (im.height + min_side) // 2
+    ))
+    # Set polaroid frame to 3:4 ratio
+    img_size = im.size[0]  # square side
+    frame_w = img_size
+    frame_h = int(img_size * 4 / 3)
+    border = int(img_size * border_size_ratio)
+    bottom_border = frame_h - img_size - border * 2
+    framed = Image.new('RGB', (frame_w + border * 2, frame_h), (255, 255, 255))
     framed.paste(im, (border, border))
     return framed
 
@@ -84,15 +91,54 @@ def draw_polaroid_caption(im, message, date_text, font_size=36, margin=10, spaci
     message_x = (width - message_width) // 2
     date_x = (width - date_width) // 2
 
-    # Draw message and date stacked vertically, centered
-    draw.text((message_x, text_y), message, font=font, fill="black")
-    draw.text((date_x, text_y + font_size + spacing), date_text, font=font, fill="black")
+    # Wrap text if too long
+    max_width = int(width * 0.7)
+    def wrap_text(text, font, max_width):
+        words = text.split()
+        lines = []
+        current = ''
+        for word in words:
+            test = current + (' ' if current else '') + word
+            if draw.textlength(test, font=font) <= max_width:
+                current = test
+            else:
+                if current:
+                    lines.append(current)
+                current = word
+        if current:
+            lines.append(current)
+        return lines
+
+    message_lines = wrap_text(message, font, max_width)
+    date_lines = wrap_text(date_text, font, max_width)
+    all_lines = message_lines + date_lines
+    line_height = font_size + spacing // 2
+    caption_bg_height = line_height * len(all_lines) + spacing
+    # Move caption box further down into bottom border
+    bottom_border = int(height * 0.12)
+    # Place caption box with enough margin from bottom
+    caption_bg_height = line_height * len(all_lines) + spacing
+    # Place caption box further down, just below the image
+    img_size = im.size[0]  # square side
+    border = int(img_size * 0.05)
+    # Move caption box a little higher above the bottom border
+    caption_bg_y = border + img_size + int(font_size * 0.05) - 10
+    caption_bg_height = line_height * len(all_lines) + spacing + 10  # extra padding
+    # Remove yellow highlight: only draw border, no fill
+    # Remove border and background: only draw text
+    # Draw each line centered
+    for i, line in enumerate(all_lines):
+        line_width = draw.textlength(line, font=font)
+        line_x = (width - line_width) // 2
+        # Move text a little higher above the bottom border
+        line_y = caption_bg_y + spacing + i * line_height - 25
+        draw.text((line_x, line_y), line, font=font, fill="#b76514")
 
     
 def load_stylish_font(font_size):
     try:
-        font_path = os.path.join(os.path.dirname(__file__), "Kapakana-VariableFont_wght.ttf")
-        # font_path = os.path.join(os.path.dirname(__file__), "PlayfairDisplay-Italic-VariableFont_wght.ttf")
+        # Use Playfair Display font for consistency with frontend
+        font_path = os.path.join(os.path.dirname(__file__), "PlayfairDisplay-Italic-VariableFont_wght.ttf")
         return ImageFont.truetype(font_path, font_size)
     except Exception as e:
         print(f"⚠️ Could not load custom font. Using default. Error: {e}")
@@ -157,8 +203,15 @@ if __name__ == '__main__':
 def process_image(image, caption, date_text):
     if image.mode != 'RGB':
         image = image.convert('RGB')
-    vintage_colors(image)
-    # add_noise(image)
+    # Apply effects in frontend order
+    # Black & White
+    # (handled in app.py before calling this)
+    # Film Grain
+    # (handled in app.py before calling this)
+    # Light Leak
+    # (handled in app.py before calling this)
+    # Vintage Colors
+    image = vintage_colors(image)
     image = add_polaroid_frame(image)
     draw_polaroid_caption(image, caption, date_text)
     return image
