@@ -4,68 +4,13 @@
     <title>Vintage Photobooth</title>
     <link rel="stylesheet" href="/static/style.css">
     <script src="/static/script.js"></script>
-    <style>
-      .preview-img {
-        width: 100%;
-        max-width: 480px;
-        aspect-ratio: 3/2;
-        object-fit: cover;
-        border-radius: 12px;
-        background: #181411;
-        margin-bottom: 1rem;
-        transition: filter 0.2s;
-      }
-      .custom-file-input {
-        display: inline-block;
-        padding: 10px 20px;
-        cursor: pointer;
-        background: #b76514;
-        color: #fff;
-        border-radius: 8px;
-        font-weight: bold;
-        font-size: 1rem;
-        border: none;
-        margin-bottom: 1rem;
-      }
-      .custom-file-input::-webkit-file-upload-button {
-        visibility: hidden;
-      }
-      .custom-file-input::before {
-        content: 'Choose File';
-        display: inline-block;
-        background: #b76514;
-        color: #fff;
-        border-radius: 8px;
-        padding: 10px 20px;
-        font-weight: bold;
-        font-size: 1rem;
-        border: none;
-        cursor: pointer;
-      }
-      .custom-file-input:active::before {
-        background: #a05412;
-      }
-      .preview-overlay {
-        position: absolute;
-        bottom: 20px;
-        left: 20px;
-        color: white;
-        font-size: 1.2rem;
-        text-shadow: 1px 1px 3px black;
-        z-index: 2;
-      }
-      .preview-container {
-        position: relative;
-        display: inline-block;
-      }
-    </style>
   </head>
   <body style="background:#181411;font-family:'Noto Serif','Noto Sans',sans-serif;">
 
     <div style="max-width:600px;margin:40px auto;padding:32px;background:#26211c;border-radius:16px;box-shadow:0 2px 16px #0002;">
       <h1 style="color:#fff;font-size:2rem;font-weight:bold;margin-bottom:1.5rem;">Vintage Photobooth</h1>
+     
       <form id="photo-form" method="POST" enctype="multipart/form-data" action="/upload">
-  <!-- No preview container at the top -->
         <div style="margin-bottom:1rem;">
           <label>Upload Image</label>
           <button type="button" id="custom-file-btn" class="themed-btn">Choose File</button>
@@ -87,7 +32,25 @@
         </div>
         <button type="submit" class="themed-btn">Create Photo</button>
       </form>
-      <div class="photo-strip glass">
-        <!-- Photo strip will be injected here by JS -->
+      <button id="download-photo-btn" class="themed-btn" style="display:none;margin:24px auto 0 auto;">Download Photo</button>
+       <div class="camera-ui">
+        <!-- Simple SVG polaroid camera graphic -->
+        <svg width="180" height="120" viewBox="0 0 180 120" style="display:block;margin:0 auto;">
+          <rect x="10" y="20" width="160" height="80" rx="18" fill="#222" stroke="#fff" stroke-width="4"/>
+          <rect x="60" y="40" width="60" height="40" rx="8" fill="#fff"/>
+          <circle cx="140" cy="40" r="12" fill="#b76514" stroke="#fff" stroke-width="3"/>
+          <rect x="80" y="100" width="20" height="12" rx="3" fill="#fff"/>
+          <rect x="70" y="110" width="40" height="8" rx="2" fill="#e6b980"/>
+        </svg>
+        <div id="camera-slot" style="width:120px;height:12px;background:#fff;margin:0 auto;position:relative;top:-16px;border-radius:4px;"></div>
+        <div id="polaroid-preview-container" style="width:120px;height:160px;margin:0 auto;position:relative;overflow:visible;">
+          <!-- Animated preview image will appear here -->
+        </div>
       </div>
     </div>
+
+    <footer style="text-align:center;color:#aaa;font-size:0.9rem;margin-top:32px;">
+      <p>Made with ❤️ Vintage Photobooth &copy; 2025</p>
+    </footer>
+  </body>
+</html>

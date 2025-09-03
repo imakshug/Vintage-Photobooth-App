@@ -29,7 +29,7 @@ def upload():
         # All images should be the same size
         widths, heights = zip(*(img.size for img in images))
         strip_width = max(widths)
-    margin = 0  # px between polaroids (no gap, fully tight layout)
+        margin = 0  # px between polaroids (no gap, fully tight layout)
         strip_height = sum(heights) + margin * (len(images) - 1)
         extra_caption_height = int(strip_width * 0.18)
         strip_img = Image.new('RGB', (strip_width, strip_height + extra_caption_height), (255, 255, 255))
