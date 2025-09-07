@@ -5,47 +5,44 @@
     <link rel="stylesheet" href="/static/style.css">
     <script src="/static/script.js"></script>
   </head>
-  <body style="background:#181411;font-family:'Noto Serif','Noto Sans',sans-serif;">
+  <body style="background:url('/static/bg.jpg') center center/cover no-repeat fixed;font-family:'Noto Serif','Noto Sans',sans-serif;min-height:100vh;overflow-x:hidden;">
 
-    <div style="max-width:600px;margin:40px auto;padding:32px;background:#26211c;border-radius:16px;box-shadow:0 2px 16px #0002;">
-      <h1 style="color:#fff;font-size:2rem;font-weight:bold;margin-bottom:1.5rem;">Vintage Photobooth</h1>
-     
-      <form id="photo-form" method="POST" enctype="multipart/form-data" action="/upload">
-        <div style="margin-bottom:1rem;">
-          <label>Upload Image</label>
-          <button type="button" id="custom-file-btn" class="themed-btn">Choose File</button>
-          <input type="file" name="photo[]" id="photo-input" accept="image/*" multiple required style="display:none;" />
-          <span id="file-name" class="file-name"></span>
-        </div>
-        <div style="margin-bottom:1rem;">
-          <label>Caption</label>
-          <input type="text" name="caption" id="caption-input" placeholder="Add a caption" />
-        </div>
-        <div style="margin-bottom:1rem;">
-          <label>Date</label>
-          <input type="text" name="date" id="date-input" placeholder="Select date" />
-        </div>
-        <div class="effects">
-          <label><input type="checkbox" name="film_grain" id="film-grain"> Film Grain</label>
-          <label><input type="checkbox" name="light_leak" id="light-leak"> Light Leak</label>
-          <label><input type="checkbox" name="bw" id="bw"> Black & White</label>
-        </div>
-        <button type="submit" class="themed-btn">Create Photo</button>
-      </form>
-      <button id="download-photo-btn" class="themed-btn" style="display:none;margin:24px auto 0 auto;">Download Photo</button>
-       <div class="camera-ui">
-        <!-- Simple SVG polaroid camera graphic -->
-        <svg width="180" height="120" viewBox="0 0 180 120" style="display:block;margin:0 auto;">
-          <rect x="10" y="20" width="160" height="80" rx="18" fill="#222" stroke="#fff" stroke-width="4"/>
-          <rect x="60" y="40" width="60" height="40" rx="8" fill="#fff"/>
-          <circle cx="140" cy="40" r="12" fill="#b76514" stroke="#fff" stroke-width="3"/>
-          <rect x="80" y="100" width="20" height="12" rx="3" fill="#fff"/>
-          <rect x="70" y="110" width="40" height="8" rx="2" fill="#e6b980"/>
-        </svg>
-        <div id="camera-slot" style="width:120px;height:12px;background:#fff;margin:0 auto;position:relative;top:-16px;border-radius:4px;"></div>
-        <div id="polaroid-preview-container" style="width:120px;height:160px;margin:0 auto;position:relative;overflow:visible;">
-          <!-- Animated preview image will appear here -->
-        </div>
+    <h1 style="color:#fff;font-size:2rem;font-weight:bold;margin:40px auto 1.5rem auto;text-align:center;text-shadow:0 2px 8px #0008;">Vintage Photobooth</h1>
+    <form id="photo-form" method="POST" enctype="multipart/form-data" action="/upload" style="max-width:600px;margin:0 auto 24px auto;padding:0 16px;">
+      <div style="margin-bottom:1rem;">
+        <label>Upload Image</label>
+        <button type="button" id="custom-file-btn" class="themed-btn">Choose File</button>
+        <input type="file" name="photo[]" id="photo-input" accept="image/*" multiple required style="display:none;" />
+        <span id="file-name" class="file-name"></span>
+      </div>
+      <div style="margin-bottom:1rem;">
+        <label>Caption</label>
+        <input type="text" name="caption" id="caption-input" placeholder="Add a caption" />
+      </div>
+      <div style="margin-bottom:1rem;">
+        <label>Date</label>
+        <input type="text" name="date" id="date-input" placeholder="Select date" />
+      </div>
+      <div class="effects">
+        <label><input type="checkbox" name="film_grain" id="film-grain"> Film Grain</label>
+        <label><input type="checkbox" name="light_leak" id="light-leak"> Light Leak</label>
+        <label><input type="checkbox" name="bw" id="bw"> Black & White</label>
+      </div>
+      <button type="submit" class="themed-btn">Create Photo</button>
+    </form>
+    <button id="download-photo-btn" class="themed-btn" style="display:none;margin:24px auto 0 auto;">Download Photo</button>
+    <div class="camera-ui" style="max-width:600px;margin:0 auto 32px auto;">
+      <!-- Simple SVG polaroid camera graphic -->
+      <svg width="180" height="120" viewBox="0 0 180 120" style="display:block;margin:0 auto;">
+        <rect x="10" y="20" width="160" height="80" rx="18" fill="#222" stroke="#fff" stroke-width="4"/>
+        <rect x="60" y="40" width="60" height="40" rx="8" fill="#fff"/>
+        <circle cx="140" cy="40" r="12" fill="#b76514" stroke="#fff" stroke-width="3"/>
+        <rect x="80" y="100" width="20" height="12" rx="3" fill="#fff"/>
+        <rect x="70" y="110" width="40" height="8" rx="2" fill="#e6b980"/>
+      </svg>
+      <div id="camera-slot" style="width:120px;height:12px;background:#fff;margin:0 auto;position:relative;top:-16px;border-radius:4px;"></div>
+      <div id="polaroid-preview-container" style="width:120px;height:160px;margin:0 auto;position:relative;overflow:visible;">
+        <!-- Animated preview image will appear here -->
       </div>
     </div>
 
